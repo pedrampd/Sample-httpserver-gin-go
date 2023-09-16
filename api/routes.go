@@ -12,7 +12,16 @@ func SetBookRoutes(server *gin.Engine, db *gorm.DB) {
 	bookRepository := repository.NewBookRepository(db)
 	bookService := logic.NewBookLogic(&bookRepository)
 	bookController := NewControllerBook(&bookService)
-
 	groupBook := server.Group("/book")
 	groupBook.GET("/all", bookController.GetBooks)
+
+}
+
+func SetAuthorRoutes(server *gin.Engine, db *gorm.DB) {
+	authorRepository := repository.NewBookRepository(db)
+	authorService := logic.NewBookLogic(&authorRepository)
+	authorController := NewControllerAuthor(&authorService)
+	groupAuthor := server.Group("/book")
+	groupAuthor.GET("/all", authorController.GetAuthors)
+
 }
